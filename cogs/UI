@@ -1,0 +1,33 @@
+import nextcord
+from nextcord.ext import commands
+from nextcord import Interaction
+import asyncio
+import sqlite3 as sl
+import datetime as dt
+
+conn = sl.connect('cy_bank.db')
+c = conn.cursor()
+
+class UI(commands.Cog):
+
+    def __init__(self,client):
+        self.client = client
+    
+    @commands.command()
+    async def check(self, ctx):
+        await ctx.send("歡迎使用宗叡銀行，你的資產已被涷結。")
+        user_id = ctx.author.id
+        c.execute("SELECT balance FROM USER WHERE discord_id = " + str(user_id) + ";")
+        balance = c.fetchone()[0]
+        await ctx.send("結餘： $" + str(balance))
+
+    @commands.command()
+    async def DC(self, ctx):
+        message = "歡迎使用宗叡銀行，你的資產已被涷結。結餘為："
+        embed = nextcord.Embed(title=message)
+        await ctx.author.send(embed=embed)
+
+    c.close
+
+def setup(client):
+    client.add_cog(UI(client))
