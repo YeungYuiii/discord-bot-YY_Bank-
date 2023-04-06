@@ -105,9 +105,9 @@ class Game(commands.Cog):
                 y = True
         
         if y == True:
-            await ctx.send("對，生日快樂")
+            await ctx.send("You Win This Time!!")
         else:
-            await ctx.send("錯，不過都生日快樂", delete_after=30)
+            await ctx.send("Wrong Answer...", delete_after=30)
         
 
 def setup(client):
