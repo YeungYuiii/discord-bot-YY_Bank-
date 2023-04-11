@@ -1,2 +1,2 @@
 # discord-bot-YY_Bank-
-Discord bot project
+discord bot written in Python
